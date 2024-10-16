@@ -1,7 +1,9 @@
 package org.febrinomahardiva.mobpro2s.ui
 
+import android.content.Intent
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -29,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import org.febrinomahardiva.mobpro2s.R
 
 @Composable
@@ -55,6 +59,11 @@ fun WelcomeScreen(
     @StringRes appName: Int,
     modifier: Modifier = Modifier,
 ) {
+    val contract = FirebaseAuthUIActivityResultContract()
+    val launcher = rememberLauncherForActivityResult(contract) {
+        // Handle the result
+    }
+
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -78,8 +87,16 @@ fun WelcomeScreen(
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp, 72.dp, 16.dp, 16.dp)
         )
-        Button(onClick = {}) {
+        Button(onClick = {launcher.launch(getSignInIntent())}) {
             Text(text = stringResource(R.string.login))
         }
     }
+}
+
+private fun getSignInIntent(): Intent {
+    return AuthUI.getInstance()
+        .createSignInIntentBuilder()
+        .setAvailableProviders(arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
+        )
+        .build()
 }

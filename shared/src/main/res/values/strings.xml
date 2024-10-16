@@ -3,4 +3,6 @@
     <string name="login_intro">Untuk memulai, silahkan masuk\n
     dengan akun Google.</string>
     <string name="login">Pilih akun</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="logout">Keluar</string>
 </resources>

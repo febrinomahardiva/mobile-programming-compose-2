@@ -21,5 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "MobileProgrammingCompose2"
 include(":app")
-include(":mobpro2m")
 include(":mahasiswa")
+include(":shared")

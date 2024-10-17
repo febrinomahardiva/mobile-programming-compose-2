@@ -17,9 +17,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.firebase.ui.auth.AuthUI
 import org.febrinomahardiva.mobpro2s.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,6 +43,7 @@ fun AppBarWithLogout(
 
 @Composable
 private fun LogoutAction() {
+    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
 
     IconButton(onClick = {expanded = true}) {
@@ -61,7 +62,7 @@ private fun LogoutAction() {
                 },
                 onClick = {
                     expanded = false
-                    Firebase.auth.signOut()
+                    AuthUI.getInstance().signOut(context)
                 }
             )
         }

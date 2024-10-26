@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Mobpro 2</string>
+    <string name="tambah_kelas">Tambah Kelas</string>
+    <string name="kelas">Nama Kelas</string>
+    <string name="simpan">Simpan</string>
+    <string name="batal">Batal</string>
 </resources>

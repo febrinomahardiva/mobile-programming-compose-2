@@ -57,6 +57,8 @@ class MainViewModel(private val uid: String) : ViewModel() {
 
     init {
         registration = db.collection(Kelas.COLLECTION)
+            .whereEqualTo(Kelas.DOSEN_ID, uid)
+            .orderBy(Kelas.NAMA)
             .addSnapshotListener(listener)
     }
 

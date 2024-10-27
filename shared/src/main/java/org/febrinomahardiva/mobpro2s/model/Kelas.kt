@@ -8,5 +8,7 @@ data class Kelas(
 
     companion object {
         const val COLLECTION = "kelas"
+        const val DOSEN_ID = "dosenId"
+        const val NAMA = "nama"
     }
 }

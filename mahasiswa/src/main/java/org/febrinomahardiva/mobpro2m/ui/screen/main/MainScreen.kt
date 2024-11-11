@@ -64,7 +64,7 @@ fun MainScreen(
 
             if (viewModel.dataKelas.isNotEmpty()) {
                 PilihKelas(viewModel.dataKelas) {
-                    Log.d("MainScreen", "Item terpilih: $it")
+                    viewModel.simpanData(it, user)
                 }
             }
         }

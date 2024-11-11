@@ -1,6 +1,9 @@
 package org.febrinomahardiva.mobpro2m.ui.screen.main
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
@@ -14,8 +17,22 @@ class MainViewModel : ViewModel() {
 
     private val db = Firebase.firestore
 
+    var kelasId by mutableStateOf<String?>("")
+        private set
+
     private val dataKelasId = mutableStateListOf<String>()
     val dataKelas = mutableStateListOf<String>()
+
+    fun getKelasMahasiswa(uid: String) {
+        db.collection(Mahasiswa.COLLECTION)
+            .document(uid)
+            .get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    kelasId = it.result.getString(Mahasiswa.KELAS_ID)
+                }
+            }
+    }
 
     fun getDataKelas() {
         db.collection(Kelas.COLLECTION)
@@ -50,6 +67,10 @@ class MainViewModel : ViewModel() {
                 .collection(Mahasiswa.COLLECTION)
                 .document(user.uid)
                 .set(Mahasiswa(user))
+        }.addOnCompleteListener {
+            if (it.isSuccessful) {
+                this.kelasId = kelasId
+            }
         }
     }
 }

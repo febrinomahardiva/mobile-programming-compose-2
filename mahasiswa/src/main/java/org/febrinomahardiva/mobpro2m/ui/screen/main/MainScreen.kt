@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,6 +48,10 @@ fun MainScreen(
 ) {
     val viewModel: MainViewModel = viewModel()
 
+    LaunchedEffect(true) {
+        viewModel.getDataKelas()
+    }
+
     Scaffold(
         topBar = { AppBarWithLogout(R.string.app_name) }
     ) { innerPadding ->
@@ -57,8 +62,10 @@ fun MainScreen(
         ) {
             UserProfileCard(user)
 
-            PilihKelas(viewModel.dataKelas) {
-                Log.d("MainScreen", "Item terpilih: $it")
+            if (viewModel.dataKelas.isNotEmpty()) {
+                PilihKelas(viewModel.dataKelas) {
+                    Log.d("MainScreen", "Item terpilih: $it")
+                }
             }
         }
     }

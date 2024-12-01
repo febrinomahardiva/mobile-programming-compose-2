@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobileProgrammingCompose2</string>
+    <string name="marker_info">%1$s di koordinat %2$.6f, %3$.6f</string>
 </resources>
